@@ -54,6 +54,11 @@ class Insert{
               return data;
            
         }
+
+
+        public boolean isEmpty(){
+            return arr.size() == 0;
+        }
     }
     public static void main(String[] args) {
         Heap h = new Heap();
@@ -62,6 +67,12 @@ class Insert{
         h.add(5);
         h.add(6);
         h.add(1);
+
+        while(!h.isEmpty()){
+            System.out.println(h.peek());
+            h.remove();
+
+        }
 
 
     }
