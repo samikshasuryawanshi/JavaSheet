@@ -36,7 +36,7 @@ class HashMapCode{
               if(node.key == key){
                 return dataIndex;
               }
-            return -1; 
+            return -1;
             }
         }
 
@@ -77,6 +77,59 @@ class HashMapCode{
                 rehash();
             }
         }
+
+        public boolean containsKey(K key){
+            int bucketIndex = hashFunction(key);
+            int dataIndex = searchInLinkedList(key, bucketIndex);
+            if(dataIndex != -1){
+                return true; // Key found
+            } else {
+                return false; // Key not found
+            }
+        }
+
+        public V get(K key){
+            int bucketIndex = hashFunction(key);
+            int dataIndex = searchInLinkedList(key, bucketIndex);
+            if(dataIndex != -1){
+                return buckets[bucketIndex].get(dataIndex).value; // Return the value if key exists
+            } else {
+                return null; // Return null if key does not exist
+            }
+        }
+
+        public void remove(K key){
+            int bucketIndex = hashFunction(key);
+            int dataIndex = searchInLinkedList(key, bucketIndex);
+            if(dataIndex != -1){
+                buckets[bucketIndex].remove(dataIndex);
+                n--; 
+                return node.value;
+            }else{
+                return null; // Return null if key does not exist
+            }
+        }
+
+        public ArrayList<K> keySet(){
+            ArrayList<K> keys = new ArrayList<>();
+            for(int i = 0; i < N; i++){
+                LinkedList<Node> bucket = buckets[i];
+                for(Node node : bucket){
+                    keys.add(node.key);
+                }
+            }
+            return keys;
+        }
+
+        public boolean isEmpty(){
+            return n == 0; // Return true if the map is empty
+        }
+
+
+
+
+
+
     }
     public static void main(String args[]){
 
@@ -86,6 +139,11 @@ class HashMapCode{
         map.put("Three", 3);
         map.put("Four", 4);
         map.put("Five", 5); // This should trigger a rehash
+
+        ArrayList<String> keys = map.keySet();
+        for(String key : keys){
+            System.out.println(key + " : " + map.get(key));
+        }
        
     }
 }
