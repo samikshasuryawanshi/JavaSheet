@@ -15,7 +15,7 @@ class HashMapCode{
         private int N;
         private LinkedList<Node> buckets[];
 
-        @suppressWarnings("unchecked")
+        // @suppressWarnings("unchecked")
         public HashMap(int N){
             this.N = 4;
             this.buckets = new LinkedList[N];
@@ -34,7 +34,7 @@ class HashMapCode{
             for(int i = 0; i < bucket.size(); i++){
                 Node node = bucket.get(i);
               if(node.key == key){
-                return dataIndex;
+                return i;
               }
             return -1;
             }
@@ -45,11 +45,11 @@ class HashMapCode{
             buckets = new LinkedList[2 * N];
             N = 2*N;
 
-            for(int i =0;i <buckets.Length;i++){
+            for(int i =0;i <buckets.length;i++){
                 buckets[i] = new LinkedList<>();
             }
 
-            for(int j =0;j<oldeBuckets.length;j++){
+            for(int j =0;j<oldBuckets.length;j++){
                LinkedList<Node> oldBucket = oldBuckets[j];
                 for(int i = 0; i < oldBucket.size(); i++){
                     Node node = oldBucket.remove();
