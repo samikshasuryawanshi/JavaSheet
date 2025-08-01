@@ -1,7 +1,6 @@
 import java.util.*;
-
-class BFS{
-    static class Edge{
+class DFS{
+     static class Edge{
         int src, dest, weight;
 
         Edge(int src, int dest,int w) {
@@ -38,34 +37,25 @@ class BFS{
         graph[5].add(new Edge(5, 6,1));
 
         graph[6].add(new Edge(6, 5,1));
-
         
     }
 
-    public static void bfs(ArrayList<Edge> graph[]){
-        Queue<Integer> queue = new LinkedList<>();
-        boolean visited[] = new boolean[graph.length];
-        queue.add(0); 
+    public static void dfs(ArrayList<Edge> graph[], int curr, boolean visited[]) {
+       System.out.print(curr + " ");
+        visited[curr] = true;
 
-        while(!queue.isEmpty()) {
-           int curr = queue.poll();
-           if(!visited[curr]) {
-                visited[curr] = true;
-                System.out.print(curr + " ");
-    
-                for(int i =0;i<graph[curr].size();i++) {
-                    Edge e = graph[curr].get(i);
-                    queue.add(e.dest); 
-                }
-              }
+        for(int i = 0; i < graph[curr].size(); i++) {
+            Edge e = graph[curr].get(i);
+            if (!visited[e.dest]) {
+                dfs(graph, e.dest, visited);
+            }
         }
     }
-    public static void main(String[] args) {
+     public static void main(String[] args) {
         int V = 7; // Number of vertices
         ArrayList<Edge> graph[] = new ArrayList[V];
         createGraph(graph);
-        bfs(graph);
-
        
+       dfs(graph, 0, new boolean[V]); // Start DFS from node 0
     }
 }
