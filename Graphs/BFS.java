@@ -42,9 +42,18 @@ class BFS{
         
     }
 
-    public static void bfs(ArrayList<Edge> graph[]){
-        Queue<Integer> queue = new LinkedList<>();
+    public static void bfs(ArrayList<Edge> graph[]) {
         boolean visited[] = new boolean[graph.length];
+
+        for(int i =0;i<graph.length;i++) {
+            if(!visited[i]) {
+                bfsUtil(graph, visited);
+            }
+        }
+    }
+
+    public static void bfsUtil(ArrayList<Edge> graph[], boolean visited[]) {
+        Queue<Integer> queue = new LinkedList<>();
         queue.add(0); 
 
         while(!queue.isEmpty()) {
@@ -64,7 +73,7 @@ class BFS{
         int V = 7; // Number of vertices
         ArrayList<Edge> graph[] = new ArrayList[V];
         createGraph(graph);
-        bfs(graph);
+        // bfs(graph);
 
        
     }

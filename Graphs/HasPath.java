@@ -1,5 +1,5 @@
-import java.util.*;
-class DFS{
+import java.util.ArrayList;
+class HasPath{
      static class Edge{
         int src, dest, weight;
 
@@ -39,32 +39,32 @@ class DFS{
         graph[6].add(new Edge(6, 5,1));
         
     }
-    public static void dfs(ArrayList<Edge> graph[]) {
-        boolean visited[] = new boolean[graph.length];
-        for (int i = 0; i < graph.length; i++) {
-            if (!visited[i]) {
-                dfsUtil(graph, i, visited);
-            }
+
+    public static boolean hasPath(ArrayList<Edge> graph[], int src, int dest, boolean visited[]) {
+        if (src == dest) {
+            return true; // Found the destination
         }
-    }
-
-
-    public static void dfsUtil(ArrayList<Edge> graph[], int curr, boolean visited[]) {
-       System.out.print(curr + " ");
-        visited[curr] = true;
-
-        for(int i = 0; i < graph[curr].size(); i++) {
-            Edge e = graph[curr].get(i);
+        visited[src] = true; // Mark the current node as visited
+        for (Edge e : graph[src]) {
             if (!visited[e.dest]) {
-                dfsUtil(graph, e.dest, visited);
+                if (hasPath(graph, e.dest, dest, visited)) {
+
+                    return true; // Path found in the recursive call
+                }
             }
         }
+        return false; // No path found
     }
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         int V = 7; // Number of vertices
         ArrayList<Edge> graph[] = new ArrayList[V];
         createGraph(graph);
-       
-       dfsUtil(graph, 0, new boolean[V]); // Start DFS from node 0
+
+        boolean visited[] = new boolean[V];
+        int src = 0; // Starting node
+        int dest = 5; // Destination node
+
+        boolean pathExists = hasPath(graph, src, dest, visited);
+        System.out.println("Path exists from " + src + " to " + dest + ": " + pathExists);
     }
 }
