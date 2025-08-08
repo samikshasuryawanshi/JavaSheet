@@ -55,4 +55,31 @@ class KruskalsAlgo{
         edges.add(new Edge(2, 3, 4));
 
     }
+
+    public static void kruskalsMst(ArrayList<Edge> edges,int V) {
+        init(); // Initialize parent and rank arrays
+        Collections.sort(edges); // Sort edges by weight
+
+        int mstCost = 0;
+        int count=0;
+        for(int i =0;count<V-1;i++){
+
+            Edge e = edges.get(i);
+            int parA = find(e.src);
+            int parB = find(e.dest);
+            if(parA != parB) {
+                union(e.src, e.dest);
+                mstCost += e.weight; // Add weight to MST cost
+                count++; // Increment count of edges in MST
+            }
+        }
+        System.out.println("Minimum Spanning Tree Cost: " + mstCost);
+
+    }
+    public static void main(String[] args) {
+        int V = 4; // Number of vertices
+        ArrayList<Edge> edges = new ArrayList<>();
+        createGraph(edges);
+        kruskalsMst(edges, V); // Find MST using Kruskal's algorithm
+    }
 }
