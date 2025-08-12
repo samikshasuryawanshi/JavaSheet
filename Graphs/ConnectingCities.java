@@ -6,7 +6,7 @@ class ConnectingCities{
         int cost;
 
         public Edge(int dest, int cost) {
-            this.dest = dest;
+            this.dest = dest; 
             this.cost = cost; // Default cost
         }
 
