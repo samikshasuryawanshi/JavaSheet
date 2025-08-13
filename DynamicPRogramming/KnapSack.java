@@ -33,6 +33,7 @@ class KnapSack{
             int ans2 = knapSackMemo(W, wt, val, n - 1, dp);
             dp[n][W] = Math.max(ans1, ans2);
             return dp[n][W];
+
         }
         else{
             //exclude
@@ -91,6 +92,7 @@ class KnapSack{
 
        System.out.println("Maximum value in Knapsack = " + knapSackRec(W, wt, val, val.length));
        System.out.println("Maximum value in Knapsack (Memoization) = " + knapSackMemo(W, wt, val, val.length, dp));
+       
        System.out.println("Max value = " + knapSackTab(val, wt, W));
 
     }
